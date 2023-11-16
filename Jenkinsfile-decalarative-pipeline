@@ -41,7 +41,7 @@ pipeline{
       }
     }
     {
-    stage('step6: MSTeams Notifications')
+    stage('step6: MSTeams Notifications!')
      steps{
       office365ConnectorSend message: 'SUCCESSFUL APPS DEPLOY TO PRODUCTION', status: 'SUCCESS', webhookUrl: 'https://liontechacademy.webhook.office.com/webhookb2/7de6738b-f601-433e-b0ac-4a9e3b49e636@b290c85e-0692-4ada-8f25-2a3b60aca73e/JenkinsCI/ab45b8b626744bbe9fecf50f3df85fa4/dcc4073d-d28b-49e6-b4ad-6e5219bfe2e8'
      }
