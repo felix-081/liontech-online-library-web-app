@@ -23,7 +23,7 @@ pipeline{
         sh "mvn sonar:sonar"
       }
     }
-    stage('Step4: UploadArtifactToNexus'){
+    stage('Step4:UploadArtifactToNexus'){
       steps{
         sh "mvn deploy"
       }
