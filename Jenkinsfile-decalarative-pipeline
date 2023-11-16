@@ -7,7 +7,7 @@ pipeline{
     stage('Step1:CloneSRC'){
       steps{
         sh "echo 'cloning the latest application version' "
-        git branch: '', url: 'https://github.com/Felixliontech/liontech-online-library-web-app.git'
+        git branch: 'felix3', url: 'https://github.com/Felixliontech/liontech-online-library-web-app.git'
       }
     }
     stage('Step2: Test+BuildWithMaven'){
