@@ -17,7 +17,7 @@ pipeline{
         sh "mvn clean package"
       }
     }
-    stage('Step3: SonarqubeCodeQualityAnalysis'){
+    stage('Step3:SonarqubeCodeQualityAnalysis'){
       steps{
         sh "echo 'Perfoming CodeQualityAnalysis' "
         sh "mvn sonar:sonar"
