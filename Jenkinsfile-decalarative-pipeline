@@ -28,6 +28,12 @@ pipeline{
         sh "mvn deploy"
       }
     } 
+    stage('8Approval$Review+prep4prod'){
+        sh "echo  'application is ready for review and prod release'"
+        timeout(time:5, unit: 'DAYS'){
+        input message: "App is ready for release to prod, please review and signup"
+      }
+    }    
     stage('Step5:DeployToProduction'){
       steps{
         deploy adapters: [tomcat9(credentialsId: 'auto-deploy-tomcat', path: '', url: 'http://44.202.135.23:8009/')], contextPath: 'Production', war: 'target/*.war'
