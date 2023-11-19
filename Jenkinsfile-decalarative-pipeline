@@ -10,7 +10,7 @@ pipeline{
         git branch: 'felix3', url: 'https://github.com/Felixliontech/liontech-online-library-web-app.git'
       }
     }
-    stage('Step2:Test&BuildWithMaven'){
+    stage('Step2: Test&BuildWithMaven'){
       steps{
         sh "echo 'running JUnit-test-cases' "
         sh "echo 'testing must passed to create artifacts ' "
