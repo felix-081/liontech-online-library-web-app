@@ -32,7 +32,7 @@ pipeline{
       steps{
        sh "echo  'application is ready for review and prod release'"
         timeout(time:5, unit: 'DAYS'){
-        input message: "App is ready for release to prod, please review and signup"
+        input message: "App is ready for release to prod, please review and sign off"
         } 
       }
     }
