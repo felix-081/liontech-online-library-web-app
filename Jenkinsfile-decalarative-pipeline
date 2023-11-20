@@ -17,13 +17,13 @@ pipeline{
         sh "mvn clean package"
       }
     }
-    stage('Step3: SonarqubeCodeQualityAnalysis'){
+    stage('Step3:SonarqubeCodeQualityAnalysis'){
       steps{
         sh "echo 'Perfoming CodeQualityAnalysis' "
         sh "mvn sonar:sonar"
       }
     }
-    stage('Step4:UploadArtifactToNexus.'){
+    stage('Step4:UploadArtifactToNexus'){
       steps{
         sh "mvn deploy"
       }
@@ -36,7 +36,7 @@ pipeline{
         } 
       }
     }
-    stage('Step5:DeployToProduction'){
+    stage('Step5: DeployToProduction'){
       steps{
         deploy adapters: [tomcat9(credentialsId: 'auto-deploy-tomcat', path: '', url: 'http://44.202.135.23:8009/')], contextPath: 'Production', war: 'target/*.war'
       }
