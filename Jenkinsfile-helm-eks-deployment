@@ -8,13 +8,13 @@ pipeline {
     }
 
     stages {
-        stage ('GITCLONE'){
+        stage ('clone from git'){
             steps{
                 checkout scmGit(branches: [[name: '*/helm-eks']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Felixliontech/liontech-online-library-web-app']])
             }
         }
 
-        stage('MavenBuild') {
+        stage('Build') {
             steps {
                 sh "mvn clean install"
             }
