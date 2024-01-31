@@ -8,7 +8,7 @@ pipeline {
     }
 
     stages {
-        stage ('GIT CLONE'){
+        stage ('GITCLONE'){
             steps{
                 checkout scmGit(branches: [[name: '*/helm-eks']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Felixliontech/liontech-online-library-web-app']])
             }
