@@ -40,7 +40,7 @@ pipeline {
         stage ('helm deploy'){
             steps {
                 script {
-                    sh "helm install liontechonlinebookstore  succpinn-bookstore  --namespace succpinn  --set  image.tag=$BUILD_NUMBER"
+                    sh "helm install succpinn-book-store  succpinn-bookstore  --namespace succpinn  --set  image.tag=$BUILD_NUMBER"
                 }
             }
         }
