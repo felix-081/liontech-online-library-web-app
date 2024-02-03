@@ -39,7 +39,7 @@ pipeline {
         stage ('Helm Deploy'){
             steps{
                 script{
-                    sh "helm install liontechonlinebookstore  bookstore  --namespace books  --set  image.tag=$BUILD_NUMBER"
+                    sh "helm install onlinebookstore  bookstore  --namespace books  --set  image.tag=$BUILD_NUMBER"
                 }
             }
         }
