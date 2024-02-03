@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage ('GITCLONE'){
             steps{
-                checkout scmGit(branches: [[name: '*/helm-eks']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Felixliontech/liontech-online-library-web-app.git']])
+                checkout scmGit(branches: [[name: '*/helm-eks']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Lion-Technology-Solutions/liontech-online-library-web-app.git']])
             }
         }
 
@@ -38,7 +38,14 @@ pipeline {
         }
       }
 
-}   
+        stage ('helm deploy'){
+            steps {
+                script {
+                    sh "helm install liontechonlinebookstore  bookstore  --namespace books  --set  image.tag=$BUILD_NUMBER"
+                }
+            }
+        }  
             
         
-    
+    }
+}
