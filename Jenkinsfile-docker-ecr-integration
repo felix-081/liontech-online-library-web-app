@@ -1,0 +1,51 @@
+pipeline {
+    tools {
+        maven 'maven3.9.6'
+    }
+    agent    any 
+    environment {
+        registry  =  "533267321107.dkr.ecr.ca-central-1.amazonaws.com/online-book-store"
+    }
+
+    stages {
+        stage ('GITCLONE'){
+            steps{
+               checkout scmGit(branches: [[name: '*/helm']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Felixliontech/liontech-online-library-web-app']])
+            }
+        }
+
+        stage('MavenBuild') {
+            steps {
+                sh "mvn clean install"
+            }
+        }
+        stage ('Builddockerfrom.war'){
+            steps{
+                script{
+                    dockerImage = docker.build registry
+                    dockerImage.tag("$BUILD_NUMBER")
+                }
+            }
+        }
+
+        stage ('PUSH TO ECR'){
+            steps{
+                script {
+                    sh 'aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin 533267321107.dkr.ecr.ca-central-1.amazonaws.com'
+                    sh  'docker push 533267321107.dkr.ecr.ca-central-1.amazonaws.com/online-book-store:$BUILD_NUMBER'
+                }
+            }
+        }
+      }
+
+        stage ('helm deploy'){
+            steps {
+                script {
+                    sh "helm install onlinebookstore  books  --namespace bookstore  --set  image.tag=$BUILD_NUMBER"
+                }
+            }
+        }  
+            
+        
+    }
+}
